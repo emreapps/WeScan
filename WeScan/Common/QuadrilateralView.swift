@@ -25,11 +25,21 @@ final class QuadrilateralView: UIView {
         let layer = CAShapeLayer()
         layer.strokeColor = UIColor.white.cgColor
         layer.lineWidth = 1.0
-        layer.opacity = 1.0
+        layer.opacity = 0.0   // Changed by Emre
         layer.isHidden = true
         
         return layer
     }()
+    
+    private let quadLayerLines: CAShapeLayer = {
+        let layer = CAShapeLayer()
+        layer.strokeColor = UIColor.white.cgColor
+        layer.lineWidth = 4.0
+        layer.opacity = 1.0
+        layer.isHidden = true
+        
+        return layer
+    }() // Changed by Emre
     
     /// We want the corner views to be displayed under the outline of the quadrilateral.
     /// Because of that, we need the quadrilateral to be drawn on a UIView above them.
@@ -59,6 +69,7 @@ final class QuadrilateralView: UIView {
     public var strokeColor: CGColor? {
         didSet {
             quadLayer.strokeColor = strokeColor
+            quadLayerLines.strokeColor = strokeColor // Added by Emre
             topLeftCornerView.strokeColor = strokeColor
             topRightCornerView.strokeColor = strokeColor
             bottomRightCornerView.strokeColor = strokeColor
@@ -111,6 +122,7 @@ final class QuadrilateralView: UIView {
         setupCornerViews()
         setupConstraints()
         quadView.layer.addSublayer(quadLayer)
+        quadView.layer.addSublayer(quadLayerLines) // Added by Emre
     }
     
     private func setupConstraints() {
@@ -138,6 +150,7 @@ final class QuadrilateralView: UIView {
         }
         
         quadLayer.frame = bounds
+        quadLayerLines.frame = bounds // Added by Emre
         if let quad = quad {
             drawQuadrilateral(quad: quad, animated: false)
         }
@@ -170,11 +183,15 @@ final class QuadrilateralView: UIView {
         if animated == true {
             let pathAnimation = CABasicAnimation(keyPath: "path")
             pathAnimation.duration = 0.2
-            quadLayer.add(pathAnimation, forKey: "path")
+            quadLayerLines.add(pathAnimation, forKey: "path") // Changed by emre
         }
         
         quadLayer.path = path.cgPath
         quadLayer.isHidden = false
+        
+        quadLayerLines.path = quad.path.reversing().cgPath // Added by Emre
+        quadLayerLines.fillColor = UIColor.clear.cgColor   // Added by Emre
+        quadLayerLines.isHidden = false                    // Added by Emre
     }
     
     private func layoutCornerViews(forQuad quad: Quadrilateral) {
