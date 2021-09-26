@@ -56,7 +56,7 @@ final class QuadrilateralView: UIView {
     public var editable = false {
         didSet {
             cornerViews(hidden: !editable)
-            quadLayer.fillColor = editable ? UIColor(white: 0.0, alpha: 0.6).cgColor : UIColor(white: 1.0, alpha: 0.5).cgColor
+            quadLayer.fillColor = editable ? UIColor(red: 40.0 / 255.0, green: 44.0 / 255.0, blue: 49.0 / 255.0, alpha: 0.5).cgColor : UIColor(white: 1.0, alpha: 0.5).cgColor // Changed by Emre
             guard let quad = quad else {
                 return
             }
@@ -82,7 +82,7 @@ final class QuadrilateralView: UIView {
             guard oldValue != isHighlighted else {
                 return
             }
-            quadLayer.fillColor = isHighlighted ? UIColor.clear.cgColor : UIColor(white: 0.0, alpha: 0.6).cgColor
+            quadLayer.fillColor = isHighlighted ? UIColor.clear.cgColor : UIColor(red: 40.0 / 255.0, green: 44.0 / 255.0, blue: 49.0 / 255.0, alpha: 0.5).cgColor.cgColor // Changed by Emre
             isHighlighted ? bringSubviewToFront(quadView) : sendSubviewToBack(quadView)
         }
     }
