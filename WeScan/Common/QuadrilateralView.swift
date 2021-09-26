@@ -24,8 +24,8 @@ final class QuadrilateralView: UIView {
     private let quadLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
         layer.strokeColor = UIColor.white.cgColor
-        layer.lineWidth = 1.0
-        layer.opacity = 0.0   // Changed by Emre
+        layer.lineWidth = 1.0 // Changed by Emre
+        layer.opacity = 1.0
         layer.isHidden = true
         
         return layer
