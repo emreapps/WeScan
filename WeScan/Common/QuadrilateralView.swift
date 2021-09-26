@@ -82,7 +82,7 @@ final class QuadrilateralView: UIView {
             guard oldValue != isHighlighted else {
                 return
             }
-            quadLayer.fillColor = isHighlighted ? UIColor.clear.cgColor : UIColor(red: 40.0 / 255.0, green: 44.0 / 255.0, blue: 49.0 / 255.0, alpha: 0.5).cgColor.cgColor // Changed by Emre
+            quadLayer.fillColor = isHighlighted ? UIColor.clear.cgColor : UIColor(red: 40.0 / 255.0, green: 44.0 / 255.0, blue: 49.0 / 255.0, alpha: 0.5).cgColor // Changed by Emre
             isHighlighted ? bringSubviewToFront(quadView) : sendSubviewToBack(quadView)
         }
     }
