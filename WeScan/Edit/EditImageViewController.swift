@@ -34,7 +34,7 @@ public final class EditImageViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.isOpaque = true
         imageView.image = image
-        imageView.backgroundColor = .black
+        imageView.backgroundColor = UIColor(red: 93.0 / 255.0, green: 173.0 / 255.0, blue: 248.0 / 255.0, alpha: 1.0)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
