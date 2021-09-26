@@ -146,6 +146,19 @@ public final class EditImageViewController: UIViewController {
         reloadImage(withAngle: rotationAngle)
     }
     
+    // Added by Emre
+    public func rotateImageRight() {
+        let rotationAngle = Measurement<UnitAngle>(value: 90, unit: .degrees)
+        reloadImage(withAngle: rotationAngle)
+    }
+    
+    
+    // Added by Emre
+    public func rotateImageLeft() {
+        let rotationAngle = Measurement<UnitAngle>(value: -90, unit: .degrees)
+        reloadImage(withAngle: rotationAngle)
+    }
+    
     private func reloadImage(withAngle angle: Measurement<UnitAngle>) {
         guard let newImage = image.rotated(by: angle) else { return }
         let newQuad = EditImageViewController.defaultQuad(allOfImage: newImage)
