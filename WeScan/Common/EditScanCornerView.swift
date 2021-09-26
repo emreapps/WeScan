@@ -53,7 +53,7 @@ final class EditScanCornerView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        circleLayer.lineWidth = CGFloat(isHighlighted ? 4.0 : 9) // Changed by Emre
+        circleLayer.lineWidth = CGFloat(isHighlighted ? 4.0 : 8.5) // Changed by Emre
         let insetDxDy = CGFloat(isHighlighted ? 2.0 : 4.0)         // Changed by Emre
         let bezierPath = UIBezierPath(ovalIn: rect.insetBy(dx: insetDxDy, dy: insetDxDy)) // Changed by Emre
         
