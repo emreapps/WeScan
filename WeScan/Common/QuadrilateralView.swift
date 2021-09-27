@@ -204,6 +204,9 @@ final class QuadrilateralView: UIView {
     func removeQuadrilateral() {
         quadLayer.path = nil
         quadLayer.isHidden = true
+        
+        quadLayerLines.path = nil      // Added by Emre
+        quadLayerLines.isHidden = true // Added by Emre
     }
     
     // MARK: - Actions
