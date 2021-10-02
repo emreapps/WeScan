@@ -17,19 +17,31 @@ extension UIImage {
     ///   - scaleFactor: Factor by which the image should be zoomed in.
     ///   - size: The size of the rect the image will be displayed in.
     /// - Returns: The scaled and cropped image.
+    // This func changed by Emre
     func scaledImage(atPoint point: CGPoint, scaleFactor: CGFloat, targetSize size: CGSize) -> UIImage? {
         guard let cgImage = self.cgImage else { return nil }
         
-        let scaledSize = CGSize(width: size.width / scaleFactor, height: size.height / scaleFactor)
+        let overalScaleFactor = self.size.width / size.width
+        
+        let scaledSize = CGSize(width: 75.0 * overalScaleFactor / scaleFactor, height: 75.0 * overalScaleFactor / scaleFactor )
         let midX = point.x - scaledSize.width / 2.0
         let midY = point.y - scaledSize.height / 2.0
         let newRect = CGRect(x: midX, y: midY, width: scaledSize.width, height: scaledSize.height)
         
-        guard let croppedImage = cgImage.cropping(to: newRect) else {
+        var transform = CGAffineTransform.identity
+        switch imageOrientation {
+        case .left: transform = CGAffineTransform(rotationAngle: 90.0 / 180.0 * .pi ).translatedBy(x: 0, y: -self.size.height)
+        case .right: transform = CGAffineTransform(rotationAngle: -90.0 / 180.0 * .pi).translatedBy(x: -self.size.width, y: 0)
+        case .down: transform = CGAffineTransform(rotationAngle: -180.0 / 180.0 * .pi).translatedBy(x: -self.size.width, y: -self.size.height)
+        default: break
+        }
+        transform = transform.scaledBy(x: self.scale, y: self.scale)
+        
+        guard let croppedImage = cgImage.cropping(to: newRect.applying(transform)) else {
             return nil
         }
         
-        return UIImage(cgImage: croppedImage)
+        return UIImage(cgImage: croppedImage, scale: scale, orientation: imageOrientation)
     }
     
     /// Scales the image to the specified size in the RGB color space.
